@@ -14,9 +14,17 @@ spec:
         mariadb:
           auth:
             rootPassword: root123
+
+        site:
+          name: erp.local
+          adminPassword: admin123
+          installApps:
+            - erpnext
+
         persistence:
           worker:
             storageClass: standard
+
   destination:
     server: https://kubernetes.default.svc
     namespace: erpnext

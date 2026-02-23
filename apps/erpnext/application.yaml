@@ -30,7 +30,7 @@ spec:
     namespace: erpnext
   syncPolicy:
     automated:
-      prune: true
-      selfHeal: false
+      prune: false
+      selfHeal: true
     syncOptions:
       - CreateNamespace=true

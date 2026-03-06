@@ -1,0 +1,47 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mi-webapi-framework
+  namespace: dotnet-framework
+  labels:
+    app: mi-webapi-framework
+    framework: net48
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: mi-webapi-framework
+  template:
+    metadata:
+      labels:
+        app: mi-webapi-framework
+        framework: net48
+    spec:
+      # Los contenedores de .NET Framework requieren nodos Windows
+      nodeSelector:
+        kubernetes.io/os: windows
+      containers:
+        - name: mi-webapi-framework
+          image: mi-webapi-framework:latest
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 80
+          resources:
+            requests:
+              memory: "256Mi"
+              cpu: "250m"
+            limits:
+              memory: "512Mi"
+              cpu: "500m"
+          readinessProbe:
+            httpGet:
+              path: /api/productos
+              port: 80
+            initialDelaySeconds: 30
+            periodSeconds: 10
+          livenessProbe:
+            httpGet:
+              path: /api/productos
+              port: 80
+            initialDelaySeconds: 60
+            periodSeconds: 20

@@ -1,0 +1,11 @@
+# Build artifacts and tooling
+.nuget/
+packages/
+bin/
+obj/
+*.user
+*.suo
+.vs/
+
+# Docker build artifacts
+*.dockerignore

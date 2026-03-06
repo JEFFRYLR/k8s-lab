@@ -1,0 +1,21 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: mi-webapi-framework
+  namespace: dotnet-framework
+  labels:
+    app: mi-webapi-framework
+spec:
+  selector:
+    app: mi-webapi-framework
+  ports:
+    - name: http
+      protocol: TCP
+      port: 80
+      targetPort: 80
+  type: ClusterIP
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: dotnet-framework
